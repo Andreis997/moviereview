@@ -90,7 +90,7 @@ public class User {
 	
 	public List<String> getRole() {
 		List<String> roles = new ArrayList<>();
-		roles.add("admin");
+		roles.add("ADMIN");
 		return roles;
 	}
 	

@@ -5,6 +5,10 @@ import org.springframework.web.context.request.WebRequest;
 
 import javax.validation.Valid;
 
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -30,8 +34,17 @@ public class AuthenticationController {
 	public ModelAndView login (@ModelAttribute("user") @Valid User user, BindingResult result, WebRequest request, Errors errors) {
 		ModelAndView modelAndView = new ModelAndView();
 		UserDAO userDAO = UserDAO.getInstance();
-		if(userDAO.isPasswordCorrect(user.getEmail(), user.getPassword()))
+		if(userDAO.isPasswordCorrect(user.getEmail(), user.getPassword())) {
+			/*
+			 * UsernamePasswordAuthenticationToken authReq = new
+			 * UsernamePasswordAuthenticationToken(user, user.getPassword());
+			 * 
+			 * Authentication auth = this.authenticationProvider.authenticate(token);
+			 * SecurityContext sc = SecurityContextHolder.getContext();
+			 * sc.setAuthentication(auth);
+			 */
 			modelAndView = new ModelAndView("redirect:/home");
+		}
 		else 
 			modelAndView.setViewName("login"); 
 		return modelAndView;    
@@ -63,10 +76,14 @@ public class AuthenticationController {
 	}
 	
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
-	public ModelAndView home() {
+	public String home() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("home");
-		return modelAndView;
+		modelAndView.addObject("user", auth.getName());
+		modelAndView.addObject("roles", auth.getAuthorities());
+		return auth.getName();
 	}
 	
 	@RequestMapping("/")
