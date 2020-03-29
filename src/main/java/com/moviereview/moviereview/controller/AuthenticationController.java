@@ -25,6 +25,17 @@ public class AuthenticationController {
 		modelAndView.setViewName("login");
 		return modelAndView;
 	}
+	
+	@RequestMapping(value="/login", method=RequestMethod.POST)
+	public ModelAndView login (@ModelAttribute("user") @Valid User user, BindingResult result, WebRequest request, Errors errors) {
+		ModelAndView modelAndView = new ModelAndView();
+		UserDAO userDAO = UserDAO.getInstance();
+		if(userDAO.isPasswordCorrect(user.getEmail(), user.getPassword()))
+			modelAndView = new ModelAndView("redirect:/home");
+		else 
+			modelAndView.setViewName("login"); 
+		return modelAndView;    
+	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public ModelAndView register() {

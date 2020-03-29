@@ -55,13 +55,14 @@ public class UserDAO {
         return false;
     }
     
-    public boolean isPasswordCorrect(String username, String password) {
+    public boolean isPasswordCorrect(String email, String password) {
         connection = DBConnection.getConnection();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("select * from users where username = ? and password = ?");
-            preparedStatement.setString(1, username);
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM users WHERE email = ? AND password = ?");
+            preparedStatement.setString(1, email);
             preparedStatement.setString(2, password);
             ResultSet resultSet = preparedStatement.executeQuery();
+            
             if (resultSet.next()) {
             	resultSet.close();
                 return true;
