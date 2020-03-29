@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.moviereview.moviereview.model.User;
 import com.moviereview.moviereview.util.DBConnection;
 
 public class UserDAO {
@@ -21,12 +22,12 @@ public class UserDAO {
     
 	private Connection connection;
     
-    public boolean userExists(String username){
+    public boolean userExists(String email){
         connection = DBConnection.getConnection();
         
          try {
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM users WHERE email = ?");
-            preparedStatement.setString(1, username);
+            preparedStatement.setString(1, email);
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
@@ -37,6 +38,25 @@ public class UserDAO {
             e.printStackTrace();
         }
         return false;
+    }
+    
+    public User findUserByEmail(String email) {
+    	connection = DBConnection.getConnection();
+        
+        try {
+           PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM users WHERE email = ?");
+           preparedStatement.setString(1, email);
+           ResultSet resultSet = preparedStatement.executeQuery();
+
+           if (resultSet.next()) {
+        	   User user = new User(resultSet.getInt("id"), resultSet.getString("username"), resultSet.getNString("email"));
+        	   resultSet.close();
+               return user;
+           }
+       } catch (SQLException e) {	
+           e.printStackTrace();
+       }
+       return null;
     }
     
     public boolean createUser(String username, String password, String email) {

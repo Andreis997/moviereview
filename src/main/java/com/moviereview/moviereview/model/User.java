@@ -1,5 +1,8 @@
 package com.moviereview.moviereview.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -35,6 +38,15 @@ public class User {
 
 	@Column(name = "status")
 	private String status;
+	
+	public User (int id, String username, String email) {
+		this.id = id;
+		this.username = username;
+		this.email = email;
+	}
+
+	public User() {
+	}
 
 	public int getId() {
 		return id;
@@ -76,4 +88,11 @@ public class User {
 		this.status = status;
 	}
 	
+	public List<String> getRole() {
+		List<String> roles = new ArrayList<>();
+		roles.add("admin");
+		return roles;
+	}
+	
 }
+ 
