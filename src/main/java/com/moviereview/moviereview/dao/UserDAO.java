@@ -49,7 +49,7 @@ public class UserDAO {
            ResultSet resultSet = preparedStatement.executeQuery();
 
            if (resultSet.next()) {
-        	   User user = new User(resultSet.getInt("id"), resultSet.getString("username"), resultSet.getNString("email"));
+        	   User user = new User(resultSet.getInt("id"), resultSet.getString("username"), resultSet.getNString("email"), resultSet.getNString("password"));
         	   resultSet.close();
                return user;
            }
