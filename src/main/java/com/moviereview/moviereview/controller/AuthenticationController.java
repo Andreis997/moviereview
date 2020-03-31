@@ -5,12 +5,13 @@ import org.springframework.web.context.request.WebRequest;
 
 import javax.validation.Valid;
 
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,36 +19,23 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.moviereview.moviereview.dao.UserDAO;
 import com.moviereview.moviereview.model.User;
+import com.moviereview.moviereview.service.SecurityServiceImpl;
 
 
 @RestController 
 public class AuthenticationController {
+	
+	@Autowired
+    private SecurityServiceImpl securityService;
+	
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	@RequestMapping(value = { "/login" }, method = RequestMethod.GET)
 	public ModelAndView login() {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("login");
 		return modelAndView;
-	}
-	
-	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public ModelAndView login (@ModelAttribute("user") @Valid User user, BindingResult result, WebRequest request, Errors errors) {
-		ModelAndView modelAndView = new ModelAndView();
-		UserDAO userDAO = UserDAO.getInstance();
-		if(userDAO.isPasswordCorrect(user.getEmail(), user.getPassword())) {
-			/*
-			 * UsernamePasswordAuthenticationToken authReq = new
-			 * UsernamePasswordAuthenticationToken(user, user.getPassword());
-			 * 
-			 * Authentication auth = this.authenticationProvider.authenticate(token);
-			 * SecurityContext sc = SecurityContextHolder.getContext();
-			 * sc.setAuthentication(auth);
-			 */
-			modelAndView = new ModelAndView("redirect:/home");
-		}
-		else 
-			modelAndView.setViewName("login"); 
-		return modelAndView;    
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
@@ -66,8 +54,9 @@ public class AuthenticationController {
 		boolean userExists = userDAO.userExists(user.getEmail());
 		
 		if (!result.hasErrors() && !userExists) {
-			userDAO.createUser(user.getUsername(), user.getPassword(), user.getEmail());
-			modelAndView = new ModelAndView("redirect:/login");
+			userDAO.createUser(user.getUsername(), bCryptPasswordEncoder.encode(user.getPassword()), user.getEmail());
+			securityService.autoLogin(user.getUsername(), user.getPassword());
+			modelAndView = new ModelAndView("redirect:/home");
 		} else {
 			modelAndView.setViewName("register"); 
 		}
@@ -75,19 +64,15 @@ public class AuthenticationController {
 		return modelAndView;
 	}
 	
-	@RequestMapping(value = "/home", method = RequestMethod.GET)
-	public String home() {
+	@GetMapping({"/", "/home"})
+	public ModelAndView index() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("home");
 		modelAndView.addObject("user", auth.getName());
 		modelAndView.addObject("roles", auth.getAuthorities());
-		return auth.getName();
-	}
-	
-	@RequestMapping("/")
-	public String index() {
-		return "root";
+		
+		return modelAndView;
 	}
 }

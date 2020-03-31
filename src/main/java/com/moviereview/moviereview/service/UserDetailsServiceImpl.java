@@ -21,25 +21,18 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private UserDAO userDAO;
 
     @Transactional(readOnly = true)
-    public UserDetails loadUserByUsername(String email)
+    public UserDetails loadUserByUsername(String username)
       throws UsernameNotFoundException {
     	
     	userDAO = UserDAO.getInstance();
     	
-        User user = userDAO.findUserByEmail(email);
+        User user = userDAO.findUserByUsername(username);
         if (user == null) {
             throw new UsernameNotFoundException(
-              "No user found with username: "+ email);
+              "No user found with username: " + username);
         }
-        boolean enabled = true;
-        boolean accountNonExpired = true;
-        boolean credentialsNonExpired = true;
-        boolean accountNonLocked = true;
-        return  new org.springframework.security.core.userdetails.User
-          (user.getEmail(), 
-          user.getPassword().toLowerCase(), enabled, accountNonExpired, 
-          credentialsNonExpired, accountNonLocked, 
-          getAuthorities(user.getRole()));
+        
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), getAuthorities(user.getRole()));
     }
      
     private static List<GrantedAuthority> getAuthorities (List<String> roles) {

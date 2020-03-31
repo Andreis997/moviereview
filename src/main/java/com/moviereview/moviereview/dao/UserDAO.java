@@ -59,6 +59,25 @@ public class UserDAO {
        return null;
     }
     
+    public User findUserByUsername(String username) {
+    	connection = DBConnection.getConnection();
+        
+        try {
+           PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM users WHERE username = ?");
+           preparedStatement.setString(1, username);
+           ResultSet resultSet = preparedStatement.executeQuery();
+
+           if (resultSet.next()) {
+        	   User user = new User(resultSet.getInt("id"), resultSet.getString("username"), resultSet.getNString("email"), resultSet.getNString("password"));
+        	   resultSet.close();
+               return user;
+           }
+       } catch (SQLException e) {	
+           e.printStackTrace();
+       }
+       return null;
+    }
+    
     public boolean createUser(String username, String password, String email) {
         connection = DBConnection.getConnection();
         try {
