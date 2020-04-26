@@ -11,7 +11,7 @@ create table users(
     PRIMARY KEY (id)
 );
 
-select * from users
+select * from users;
 
 ALTER TABLE users
 MODIFY COLUMN password varchar(256);
