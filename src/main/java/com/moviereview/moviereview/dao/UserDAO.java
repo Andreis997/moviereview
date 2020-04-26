@@ -101,7 +101,6 @@ public class UserDAO {
             preparedStatement.setString(1, email);
             preparedStatement.setString(2, password);
             ResultSet resultSet = preparedStatement.executeQuery();
-
             
             if (resultSet.next()) {
             	resultSet.close();

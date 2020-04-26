@@ -1,5 +1,8 @@
 package com.moviereview.moviereview.controller;
 
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.request.WebRequest;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +15,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.moviereview.moviereview.dao.UserDAO;
@@ -29,19 +30,10 @@ public class AuthenticationController {
 	
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
-	
-	  @RequestMapping(value = "/movieDetail")
-	  public ModelAndView movieDetail() {
-			ModelAndView modelAndView = new ModelAndView();
-
-			modelAndView.setViewName("movieDetail");
-			return modelAndView;
-	  }
 
 	@RequestMapping(value = { "/login" }, method = RequestMethod.GET)
 	public ModelAndView login() {
 		ModelAndView modelAndView = new ModelAndView();
-
 		modelAndView.setViewName("login");
 		return modelAndView;
 	}
@@ -59,7 +51,6 @@ public class AuthenticationController {
 	public ModelAndView registerUserAccount (@ModelAttribute("user") @Valid User user, BindingResult result, WebRequest request, Errors errors) {    
 		ModelAndView modelAndView = new ModelAndView();
 		UserDAO userDAO = UserDAO.getInstance();
-
 		boolean userExists = userDAO.userExists(user.getEmail());
 		
 		if (!result.hasErrors() && !userExists) {
