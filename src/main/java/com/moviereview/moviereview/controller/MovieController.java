@@ -8,7 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RestController 
 public class MovieController {
 	
-	@GetMapping({"/", "/movieDetail"})
+	@GetMapping({"/movieDetail"})
 	 public ModelAndView movieDetail() {
 			ModelAndView modelAndView = new ModelAndView();
 			modelAndView.setViewName("movieDetail");

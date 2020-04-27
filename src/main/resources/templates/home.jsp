@@ -1,8 +1,5 @@
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
-
-
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Latest compiled and minified CSS -->
@@ -97,22 +94,23 @@ html {
 		<h1>Movie list</h1>
 	</div>
 	<h2 style="text-align: center">Top trending movies</h2>
-	<div class="row">
-		<c:forEach var="movie" items="${movies}">
-			<div class="col-md-3">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3" th:each="movie: ${movies}">
 				<div class="card">
-						<img src="/w3images/team1.jpg" alt="Movie1" style="width: 100%" class="card-img-top">
-						<div class="card-body container">
-							<h2>${movie.getName()}</h2>
-							<p class="card-title">Movie cast</p>
-							<p class="card-text">Some text that describes the movie</p>
-							<p>
-								<a href="#" class="btn btn-primary">Go somewhere</a>
-							</p>
+					<img src="/w3images/team1.jpg" alt="Movie1" style="width: 100%"
+						class="card-img-top">
+					<div class="card-body container">
+						<h2 th:text="${movie.getTitle()}"></h2>
+						<p class="card-title">Movie cast</p>
+						<p class="card-text">Some text that describes the movie</p>
+						<p>
+							<a href="#" class="btn btn-primary">Go somewhere</a>
+						</p>
 					</div>
 				</div>
 			</div>
-		</c:forEach>
+		</div>
 	</div>
 </body>
 </html>
