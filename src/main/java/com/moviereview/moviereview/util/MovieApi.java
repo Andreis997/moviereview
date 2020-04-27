@@ -26,7 +26,7 @@ public class MovieApi {
 			for (JsonNode resultNode : resultsNode) {
 				movies.add(new Movie(resultNode.get("id").asInt(),
 										resultNode.get("title").textValue(),
-										resultNode.get("vote_average").textValue(),
+										String.valueOf(resultNode.get("vote_average").asDouble()),
 										resultNode.get("overview").textValue(),
 										resultNode.get("release_date").textValue(),
 										resultNode.get("poster_path").textValue()));
