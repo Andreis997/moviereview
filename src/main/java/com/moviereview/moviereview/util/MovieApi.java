@@ -12,20 +12,28 @@ import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.moviereview.moviereview.model.Movie;
 
 public class MovieApi {
 	private static final String apiUrl = "https://api.themoviedb.org/3";
 
-	public static List<String> getPopularMovies() throws IOException {
-		List<String> movies = new ArrayList<String>();
-
-		ObjectMapper mapper = new ObjectMapper();
-		JsonNode jsonNode = mapper.readTree(executeRestTemplate("/movie/popular"));
-		JsonNode resultsNode = jsonNode.get("results");
-		for (JsonNode resultNode : resultsNode) {
-			movies.add(resultNode.get("original_title").textValue());
+	public static List<Movie> getPopularMovies() {
+		List<Movie> movies = new ArrayList<Movie>();
+		try {
+			ObjectMapper mapper = new ObjectMapper();
+			JsonNode jsonNode = mapper.readTree(executeRestTemplate("/movie/popular"));
+			JsonNode resultsNode = jsonNode.get("results");
+			for (JsonNode resultNode : resultsNode) {
+				movies.add(new Movie(resultNode.get("id").asInt(),
+										resultNode.get("title").textValue(),
+										resultNode.get("vote_average").textValue(),
+										resultNode.get("overview").textValue(),
+										resultNode.get("release_date").textValue(),
+										resultNode.get("poster_path").textValue()));
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
 		}
-
 		return movies;
 	}
 

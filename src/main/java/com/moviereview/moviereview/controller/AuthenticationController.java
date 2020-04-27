@@ -1,5 +1,8 @@
 package com.moviereview.moviereview.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +20,10 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.moviereview.moviereview.dao.UserDAO;
+import com.moviereview.moviereview.model.Movie;
 import com.moviereview.moviereview.model.User;
 import com.moviereview.moviereview.service.SecurityServiceImpl;
+import com.moviereview.moviereview.util.MovieApi;
 
 
 @RestController 
@@ -29,13 +34,6 @@ public class AuthenticationController {
 	
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
-	
-	 @RequestMapping(value = "/movieDetail")
-	 public ModelAndView movieDetail() {
-			ModelAndView modelAndView = new ModelAndView();
-			modelAndView.setViewName("movieDetail");
-			return modelAndView;
-	  }
 
 	@RequestMapping(value = { "/login" }, method = RequestMethod.GET)
 	public ModelAndView login() {
@@ -78,6 +76,9 @@ public class AuthenticationController {
 		modelAndView.setViewName("home");
 		modelAndView.addObject("user", auth.getName());
 		modelAndView.addObject("roles", auth.getAuthorities());
+		
+		List<Movie> movies = MovieApi.getPopularMovies();
+		modelAndView.addObject("movies", movies);
 		
 		return modelAndView;
 	}
