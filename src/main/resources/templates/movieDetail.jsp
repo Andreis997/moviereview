@@ -18,99 +18,95 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <style>
-body {
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-/* Style inputs */
-input[type=text], select, textarea {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #ccc;
-  margin-top: 6px;
-  margin-bottom: 16px;
-  resize: vertical;
-}
-
-input[type=submit] {
-  background-color: #4CAF50;
-  color: white;
-  padding: 12px 20px;
-  border: none;
-  cursor: pointer;
-}
-
-input[type=submit]:hover {
-  background-color: #45a049;
-}
-
-/* Style the container/contact section */
-.container {
-  border-radius: 5px;
-  background-color: #f2f2f2;
-  padding: 10px;
-}
-
-/* Create two columns that float next to eachother */
-.column {
-  float: left;
-  width: 50%;
-  margin-top: 6px;
-  padding: 20px;
-}
-
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
-@media screen and (max-width: 600px) {
-  .column, input[type=submit] {
-    width: 100%;
-    margin-top: 0;
-  }
-}
 </style>
 </head>
 <body>
 
-<div class="container">
-  <div style="text-align:center">
-    <h2>Here comes the movie title</h2>
-    <p>Here comes the movie description</p>
-  </div>
-  <div class="row">
-    <div class="column">
-      <img src="/w3images/map.jpg" style="width:100%">
+<nav class="navbar navbar-light bg-light justify-content-between navbar-dark bg-dark" >
+  <a class="navbar-brand">MovieReview</a>
+  <form class="form-inline">
+    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button>
+  </form>
+</nav>
+
+<div class="container bg-faded">
+    <h1 class="text-center">Here comes the title</h1>
+    <div class="row">
+        <div class="col text-center">Rating</div>
     </div>
-    <div class="column">
-      <form action="/action_page.php">
-        <label for="subject">Write a new review: </label>
-        <textarea id="subject" name="subject" placeholder="Write something.." style="height:170px"></textarea>
-        <input type="submit" value="Submit">
-      </form>
+    <hr>
+    <div class="row">
+        <div class="col">
+            <div class="mx-auto w-50 p-3 bg-dark text-white text-center">
+                <span>Description</span>
+            </div>
+        </div>
     </div>
-  </div>
-  <div class="row">
-  	 <div class="column">
-      <div class="row"><label>Review 1 here</label></div>
-      <div class="row"><label>Review 2 here</label></div>
-      <div class="row"><label>Review 3 here</label></div>
-      <div class="row"><label>Review 4 here</label></div>
-      <div class="row"><label>Review 5 here</label></div>
-      <div class="row"><label>Review 6 here</label></div>
-      <div class="row"><label>Review 7 here</label></div>
-      <div class="row"><label>Review 8 here</label></div>
-      <div class="row"><label>Review 9 here</label></div>
+    <hr>
+    <div class="row">
+        <div class="col-12">
+            <img class="mx-auto d-block" src="//placehold.it/200x150?text=mx-auto">
+        </div>
     </div>
-  </div>
+    <hr>
+     <h4 class="text-center">Reviews from IMDB.</h4>
+    <div class="row">
+        <div class="col-4 mx-auto">
+            <div class="card card-body mb-2">
+                <h6>Review 1</h6>
+                <code>Review detail</code>
+            </div>
+        </div>
+        <div class="col-4 mx-auto">
+            <div class="card card-body mb-2">
+                <h6>Review 2</h6>
+                <code>Review detail</code>
+            </div>
+        </div>
+        <div class="col-4 mx-auto">
+            <div class="card card-body mb-2">
+                <h6>Review 3</h6>
+                <code>Review detail</code>
+            </div>
+        </div>
+        <div class="col-4 mx-auto">
+            <div class="card card-body mb-2">
+                <h6>Review 4</h6>
+                <code>Review detail</code>
+            </div>
+        </div>
+    </div>
+    <hr>
+    
+         <h4 class="text-center">Reviews from MovieReview users.</h4>
+    <div class="row">
+        <div class="col-4 mx-auto">
+            <div class="card card-body mb-2">
+                <h6>Review 1</h6>
+                <code>Review detail</code>
+            </div>
+        </div>
+        <div class="col-4 mx-auto">
+            <div class="card card-body mb-2">
+                <h6>Review 2</h6>
+                <code>Review detail</code>
+            </div>
+        </div>
+        <div class="col-4 mx-auto">
+            <div class="card card-body mb-2">
+                <h6>Review 3</h6>
+                <code>Review detail</code>
+            </div>
+        </div>
+        <div class="col-4 mx-auto">
+            <div class="card card-body mb-2">
+                <h6>Review 4</h6>
+                <code>Review detail</code>
+            </div>
+        </div>
+    </div>
+    
 </div>
 
 </body>
