@@ -31,13 +31,6 @@ html {
 	box-sizing: inherit;
 }
 
-.column {
-	float: left;
-	width: 33.3%;
-	margin-bottom: 16px;
-	padding: 0 8px;
-}
-
 .card {
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 	margin: 8px;
@@ -64,51 +57,41 @@ html {
 	color: grey;
 }
 
-.button {
-	border: none;
-	outline: 0;
-	display: inline-block;
-	padding: 8px;
-	color: white;
-	background-color: #000;
-	text-align: center;
-	cursor: pointer;
-	width: 100%;
+.card:hover {
+	background-color: #DCDCDC;
 }
 
-.button:hover {
-	background-color: #555;
-}
-
-@media screen and (max-width: 650px) {
-	.column {
-		width: 100%;
-		display: block;
-	}
+a.custom-card, a.custom-card:hover {
+	color: inherit;
+	text-decoration: none;
 }
 </style>
 </head>
 <body>
-	<div class="about-section">
-		<h1>Movie list</h1>
-		<a href="<c:url value="/logout" />">Logout</a>
-	</div>
+	<nav class="navbar navbar-light bg-light justify-content-between navbar-dark bg-dark">
+		<a class="navbar-brand">MovieReview</a>
+		<form class="form-inline">
+			<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button>
+		</form>
+	</nav>
 	<h2 style="text-align: center">Top trending movies</h2>
 	<div class="container">
 		<div class="row">
-			<div class="col-md-4 d-flex align-items-stretch" th:each="movie: ${movies}">
+			<div class="col-md-4 d-flex align-items-stretch"
+				th:each="movie: ${movies}">
 				<div class="card">
-					<img th:src="${movie.getPosterPath()}" alt="Movie"
-						style="width: 100%" class="card-img-top">
-					<div class="card-body container">
-						<h5 class="card-title" th:text="${movie.getTitle()}"></h5>
-						<h6 class="card-subtitle mb-2 text-muted"
-							th:text="${movie.getRelease_date()}"></h6>
-						<p class="card-text" th:text="${movie.getOverview()}"></p>
-						<div class="card-footer bg-transparent">
-							<a href="#" class="btn btn-primary">Review</a>
+					<a th:href="@{/movieDetail(id=${movie.getId()})}"
+						class="custom-card"> <img th:src="${movie.getPosterPath()}"
+						alt="Movie" style="width: 100%" class="card-img-top">
+						<div class="card-body container">
+							<br>	
+							<h5 class="card-title" th:text="${movie.getTitle()}"></h5>
+							<h6 class="card-subtitle mb-2 text-muted"
+								th:text="${movie.getRelease_date()}"></h6>
+							<p class="card-text" th:text="${movie.getOverview()}"></p>
 						</div>
-					</div>
+					</a>
 				</div>
 			</div>
 		</div>
