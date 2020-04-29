@@ -1,8 +1,9 @@
 package com.moviereview.moviereview.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +42,14 @@ public class AuthenticationController {
 		modelAndView.setViewName("login");
 		return modelAndView;
 	}
-
+	
+    @RequestMapping(value="/logout",method = RequestMethod.GET)
+    public String logout(HttpServletRequest request){
+        HttpSession httpSession = request.getSession();
+        httpSession.invalidate();
+        return "redirect:/login?logout";
+    }
+	
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public ModelAndView register() {
 		ModelAndView modelAndView = new ModelAndView();

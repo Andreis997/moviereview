@@ -7,9 +7,9 @@
 
 	<head>
 		<meta charset="ISO-8859-1">
-		<title>Insert title here</title>
+		<title>Thank you</title>
 		</head>
 	<body>
-	
+	<h1>Thank you for using this platform</h1>
 	</body>
 </html>

@@ -92,20 +92,21 @@ html {
 
 	<div class="about-section">
 		<h1>Movie list</h1>
+		<a href="<c:url value="/logout" />">Logout</a>
 	</div>
 	<h2 style="text-align: center">Top trending movies</h2>
 	<div class="container">
 		<div class="row">
 			<div class="col-md-3" th:each="movie: ${movies}">
 				<div class="card">
-					<img src="/w3images/team1.jpg" alt="Movie1" style="width: 100%"
+					<img src="${movie.getPosterPath()}" alt="Movie" style="width: 100%"
 						class="card-img-top">
 					<div class="card-body container">
 						<h2 th:text="${movie.getTitle()}"></h2>
-						<p class="card-title">Movie cast</p>
-						<p class="card-text">Some text that describes the movie</p>
+						<p class="card-title" th:text="${movie.getRelease_date()}"></p>
+						<p class="card-text" th:text="${movie.getOverview()}"></p>
 						<p>
-							<a href="#" class="btn btn-primary">Go somewhere</a>
+							<a href="#" class="btn btn-primary">Review</a>
 						</p>
 					</div>
 				</div>
