@@ -69,7 +69,7 @@ public class Movie {
 
 
 	public String getPosterPath() {
-		return "https://image.tmdb.org/t/p/original"+posterPath;
+		return "https://image.tmdb.org/t/p/w200" + posterPath;
 	}
 
 

@@ -89,7 +89,6 @@ html {
 </style>
 </head>
 <body>
-
 	<div class="about-section">
 		<h1>Movie list</h1>
 		<a href="<c:url value="/logout" />">Logout</a>
@@ -97,18 +96,18 @@ html {
 	<h2 style="text-align: center">Top trending movies</h2>
 	<div class="container">
 		<div class="row">
-			<div class="col-md-3" th:each="movie: ${movies}">
+			<div class="col-md-4 d-flex align-items-stretch" th:each="movie: ${movies}">
 				<div class="card">
-					<img src="${movie.getPosterPath()}" alt="Movie" style="width: 100%"
-						class="card-img-top">
+					<img th:src="${movie.getPosterPath()}" alt="Movie"
+						style="width: 100%" class="card-img-top">
 					<div class="card-body container">
-						<h2 th:text="${movie.getTitle()}"></h2>
-						<h2 th:text="${movie.getPosterPath()}"></h2>
-						<p class="card-title" th:text="${movie.getRelease_date()}"></p>
+						<h5 class="card-title" th:text="${movie.getTitle()}"></h5>
+						<h6 class="card-subtitle mb-2 text-muted"
+							th:text="${movie.getRelease_date()}"></h6>
 						<p class="card-text" th:text="${movie.getOverview()}"></p>
-						<p>
+						<div class="card-footer bg-transparent">
 							<a href="#" class="btn btn-primary">Review</a>
-						</p>
+						</div>
 					</div>
 				</div>
 			</div>
