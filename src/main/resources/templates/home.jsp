@@ -103,6 +103,7 @@ html {
 						class="card-img-top">
 					<div class="card-body container">
 						<h2 th:text="${movie.getTitle()}"></h2>
+						<h2 th:text="${movie.getPosterPath()}"></h2>
 						<p class="card-title" th:text="${movie.getRelease_date()}"></p>
 						<p class="card-text" th:text="${movie.getOverview()}"></p>
 						<p>
