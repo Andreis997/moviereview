@@ -70,8 +70,13 @@ a.custom-card, a.custom-card:hover {
 <body>
 	<nav class="navbar navbar-light bg-light justify-content-between navbar-dark bg-dark">
 		<a class="navbar-brand">MovieReview</a>
-		<form class="form-inline">
+		
+		<form class="form-inline" action="search">
 			<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+		</form>
+		
+		<form class="form-inline" action="logout">
 			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button>
 		</form>
 	</nav>

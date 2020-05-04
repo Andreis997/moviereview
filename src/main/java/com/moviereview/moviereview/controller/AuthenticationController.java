@@ -44,10 +44,10 @@ public class AuthenticationController {
 	}
 	
     @RequestMapping(value="/logout",method = RequestMethod.GET)
-    public String logout(HttpServletRequest request){
+    public ModelAndView logout(HttpServletRequest request){
         HttpSession httpSession = request.getSession();
         httpSession.invalidate();
-        return "redirect:/login?logout";
+        return new ModelAndView("redirect:/login");
     }
 	
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
