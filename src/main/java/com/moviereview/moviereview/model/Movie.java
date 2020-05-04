@@ -1,5 +1,10 @@
 package com.moviereview.moviereview.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.moviereview.moviereview.dao.ReviewDAO;
+
 public class Movie {
 	
 	private int id;
@@ -8,6 +13,7 @@ public class Movie {
 	private String overview; 
 	private String release_date;
 	private String posterPath;
+	private List<Review> reviews;
 	
 	public Movie(int id, String title, String voteAverage, String overview, String release_date, String posterPath) {
 		this.id = id;
@@ -16,6 +22,7 @@ public class Movie {
 		this.overview = overview;
 		this.release_date = release_date;
 		this.posterPath = posterPath;
+		this.reviews = new ArrayList<>();
 	}
 
 	public int getId() {
@@ -76,4 +83,16 @@ public class Movie {
 	public void setPosterPath(String posterPath) {
 		this.posterPath = posterPath;
 	}
+	
+	public List<Review> getReviews() {
+		if (reviews.isEmpty()) {
+			reviews = ReviewDAO.getInstance().getAllReviewsOfMovie(this.id);
+		}
+		return reviews;
+	}
+	
+	public void setReviews(List<Review> reviews) {
+		this.reviews = reviews;
+	}
+	
 }

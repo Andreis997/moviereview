@@ -1,13 +1,18 @@
 package com.moviereview.moviereview.model;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -20,30 +25,34 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
 	private int id;
-	
+
 	@NotNull
-    @NotEmpty
+	@NotEmpty
 	@Column(name = "username")
 	private String username;
-	
+
 	@NotNull
-    @NotEmpty
+	@NotEmpty
 	@Column(name = "email")
 	private String email;
 
 	@NotNull
-    @NotEmpty
+	@NotEmpty
 	@Column(name = "password")
 	private String password;
 
 	@Column(name = "status")
 	private String status;
-	
-	public User (int id, String username, String email, String password) {
+
+	@OneToMany(mappedBy = "review", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	private Set<Review> reviews;
+
+	public User(int id, String username, String email, String password) {
 		this.id = id;
 		this.username = username;
 		this.email = email;
 		this.password = password;
+		this.reviews = new HashSet<Review>();
 	}
 
 	public User() {
@@ -88,12 +97,20 @@ public class User {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
+
 	public List<String> getRole() {
 		List<String> roles = new ArrayList<>();
 		roles.add("ADMIN");
 		return roles;
 	}
 	
+	public Set<Review> getReviews() {
+		return this.reviews;
+	}
+	
+	public void setReviews(Set<Review> reviews) {
+		this.reviews = reviews;
+		reviews.forEach(r -> r.setUser(this));
+	}
+
 }
- 
