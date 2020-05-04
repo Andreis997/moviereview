@@ -31,7 +31,7 @@
 </nav>
 
 <div class="container bg-faded">
-    <h1 class="text-center">Here comes the title</h1>
+    <h1 class="text-center" th:text="${currentMovie.getTitle()}"></h1>
     <div class="row">
         <div class="col text-center">Rating</div>
     </div>

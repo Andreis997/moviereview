@@ -35,6 +35,26 @@ public class MovieApi {
 		}
 		return movies;
 	}
+	
+	public static Movie getMovie(String id) {
+		Movie movie = null;
+		try {
+			ObjectMapper mapper = new ObjectMapper();
+			JsonNode resultNode = mapper.readTree(executeRestTemplate("/movie/" + id));
+			
+			movie = new Movie(resultNode.get("id").asInt(),
+										resultNode.get("title").textValue(),
+										String.valueOf(resultNode.get("vote_average").asDouble()),
+										resultNode.get("overview").textValue(),
+										resultNode.get("release_date").textValue(),
+										resultNode.get("poster_path").textValue());
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return movie;
+		
+	}
 
 	private static String executeRestTemplate(final String path) throws UnsupportedEncodingException {
 		Map<String, String> parameters = new HashMap<>();
