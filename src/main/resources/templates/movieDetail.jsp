@@ -37,53 +37,37 @@
 <div class="container bg-faded">
     <h1 class="text-center" th:text="${currentMovie.getTitle()}"></h1>
     <div class="row">
-        <div class="col text-center">Rating</div>
+        <div class="col text-center" th:text="${currentMovie.getVoteAverage()}">Rating</div>
     </div>
     <hr>
     <div class="row">
         <div class="col">
             <div class="mx-auto w-50 p-3 bg-dark text-white text-center">
-                <span>Description</span>
+                <span th:text="${currentMovie.getOverview()}"></span>
             </div>
         </div>
     </div>
     <hr>
     <div class="row">
         <div class="col-12">
-            <img class="mx-auto d-block" src="//placehold.it/200x150?text=mx-auto">
+        <img th:src="${currentMovie.getPosterPath()}"
+						alt="Movie"  class="card-img-top">
+  
         </div>
     </div>
     <hr>
-     <h4 class="text-center">Reviews from IMDB.</h4>
+     <h4 class="text-center">Reviews from MovieReview users.</h4>
     <div class="row">
-        <div class="col-4 mx-auto">
+        <div class="col-4 mx-auto" th:each="review: ${currentMovie.getReviews()}">
             <div class="card card-body mb-2">
-                <h6>Review 1</h6>
-                <code>Review detail</code>
-            </div>
-        </div>
-        <div class="col-4 mx-auto">
-            <div class="card card-body mb-2">
-                <h6>Review 2</h6>
-                <code>Review detail</code>
-            </div>
-        </div>
-        <div class="col-4 mx-auto">
-            <div class="card card-body mb-2">
-                <h6>Review 3</h6>
-                <code>Review detail</code>
-            </div>
-        </div>
-        <div class="col-4 mx-auto">
-            <div class="card card-body mb-2">
-                <h6>Review 4</h6>
-                <code>Review detail</code>
+                <h6 >Review </h6>
+                <code th:text="${review.getContent()}"></code>
             </div>
         </div>
     </div>
     <hr>
     
-         <h4 class="text-center">Reviews from MovieReview users.</h4>
+         <h4 class="text-center">Reviews from IMDB users.</h4>
     <div class="row">
         <div class="col-4 mx-auto">
             <div class="card card-body mb-2">
