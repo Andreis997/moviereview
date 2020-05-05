@@ -95,6 +95,20 @@
         </div>
     </div>
     
+             <h4 class="text-center">Submit a review.</h4>
+             
+    <div class="row">
+
+		<form class="col-md-12">
+		  <div class="form-group " >
+		    <label for="exampleFormControlTextarea1"></label>
+		    <textarea class="form-control" id="reviewArea" rows="3"></textarea>
+		  </div>
+		  <button type="submit" class="btn btn-primary col-md-12">Submit</button>
+		</form>
+
+    </div>
+    
 </div>
 
 </body>
