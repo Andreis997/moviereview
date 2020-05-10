@@ -51,7 +51,7 @@
     <div class="row">
         <div class="col-12">
         <img th:src="${currentMovie.getPosterPath()}"
-						alt="Movie"  class="card-img-top">
+						alt="Movie"  class="card-img-top mx-auto w-50" >
   
         </div>
     </div>
