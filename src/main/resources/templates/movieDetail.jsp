@@ -56,7 +56,7 @@
         </div>
     </div>
     <hr>
-     <h4 class="text-center">Reviews from MovieReview users.</h4>
+     <h4 class="text-center">Reviews from MovieReview users</h4>
     <div class="row">
         <div class="col-4 mx-auto" th:each="review: ${currentMovie.getReviews()}">
             <div class="card card-body mb-2">
@@ -67,7 +67,7 @@
     </div>
     <hr>
     
-         <h4 class="text-center">Reviews from IMDB users.</h4>
+         <h4 class="text-center">Reviews from IMDB users</h4>
     <div class="row">
         <div class="col-4 mx-auto">
             <div class="card card-body mb-2">
