@@ -14,8 +14,13 @@ public class Movie {
 	private String release_date;
 	private String posterPath;
 	private List<Review> reviews;
+	private List<ExternalReview> externalReviews;
 	
 	public Movie(int id, String title, String voteAverage, String overview, String release_date, String posterPath) {
+		this(id,title, voteAverage,overview, release_date, posterPath, null);
+	}
+	
+	public Movie(int id, String title, String voteAverage, String overview, String release_date, String posterPath, List<ExternalReview> externalReviews) {
 		this.id = id;
 		this.title = title;
 		this.voteAverage = voteAverage;
@@ -23,6 +28,7 @@ public class Movie {
 		this.release_date = release_date;
 		this.posterPath = posterPath;
 		this.reviews = new ArrayList<>();
+		this.externalReviews = externalReviews;
 	}
 
 	public int getId() {
@@ -93,6 +99,14 @@ public class Movie {
 	
 	public void setReviews(List<Review> reviews) {
 		this.reviews = reviews;
+	}
+	
+	public List<ExternalReview> getExternalReviews() {
+		return externalReviews;
+	}
+	
+	public void setExternalReviews(List<ExternalReview> externalReviews) {
+		this.externalReviews = externalReviews;
 	}
 	
 }

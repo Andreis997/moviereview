@@ -11,6 +11,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.moviereview.moviereview.model.ExternalReview;
 import com.moviereview.moviereview.model.Movie;
 
 public class MovieApi {
@@ -49,6 +50,13 @@ public class MovieApi {
 										resultNode.get("release_date").textValue(),
 										resultNode.get("poster_path").textValue());
 			
+			List<ExternalReview> l = new ArrayList<>();
+			resultNode = mapper.readTree(executeRestTemplate("/movie/" + id + "/reviews"));
+			JsonNode resultsNode = resultNode.get("results");
+			for (JsonNode rn : resultsNode)  {
+				l.add(new ExternalReview(rn.get("id").asText(), rn.get("author").asText(), rn.get("content").asText(), rn.get("url").asText()));
+			}
+			movie.setExternalReviews(l);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

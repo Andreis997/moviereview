@@ -69,40 +69,24 @@
     
          <h4 class="text-center">Reviews from IMDB users</h4>
     <div class="row">
-        <div class="col-4 mx-auto">
+        <div class="col-4 mx-auto" th:each="review: ${currentMovie.getExternalReviews()}">
             <div class="card card-body mb-2">
                 <h6>Review 1</h6>
-                <code>Review detail</code>
+                <h6 th:text="${review.getAuthor()}"></h6>
+                <code th:text="${review.getContent()}"></code>
             </div>
         </div>
-        <div class="col-4 mx-auto">
-            <div class="card card-body mb-2">
-                <h6>Review 2</h6>
-                <code>Review detail</code>
-            </div>
-        </div>
-        <div class="col-4 mx-auto">
-            <div class="card card-body mb-2">
-                <h6>Review 3</h6>
-                <code>Review detail</code>
-            </div>
-        </div>
-        <div class="col-4 mx-auto">
-            <div class="card card-body mb-2">
-                <h6>Review 4</h6>
-                <code>Review detail</code>
-            </div>
-        </div>
+        
     </div>
     
              <h4 class="text-center">Submit a review</h4>
              
     <div class="row">
 
-		<form class="col-md-12">
+		<form class="col-md-12" method="POST" th:action="@{/addReview(id=${movieId})}">
 		  <div class="form-group " >
 		    <label for="exampleFormControlTextarea1"></label>
-		    <textarea class="form-control" id="reviewArea" rows="3"></textarea>
+		    <textarea class="form-control" id="reviewArea" rows="3" th:name="review"></textarea>
 		  </div>
 		  <button type="submit" class="btn btn-primary col-md-12">Submit</button>
 		</form>
