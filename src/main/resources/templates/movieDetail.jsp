@@ -95,7 +95,7 @@
         </div>
     </div>
     
-             <h4 class="text-center">Submit a review.</h4>
+             <h4 class="text-center">Submit a review</h4>
              
     <div class="row">
 
