@@ -38,12 +38,22 @@ public class User {
 
 	@Column(name = "status")
 	private String status;
+	
+	@Column(name = "role")
+	private String role;
 
 	public User(int id, String username, String email, String password) {
 		this.id = id;
 		this.username = username;
 		this.email = email;
 		this.password = password;
+	}
+	
+	public User(String username, String email, String role, int id) {
+		this.id = id;
+		this.username = username;
+		this.email = email;
+		this.role = role;
 	}
 
 	public User() {
@@ -89,10 +99,13 @@ public class User {
 		this.status = status;
 	}
 
-	public List<String> getRole() {
+	public String getRole() {
+		return role;
+	}
+	
+	public List<String> getRoles() {
 		List<String> roles = new ArrayList<>();
 		roles.add("ADMIN");
 		return roles;
 	}
-
 }

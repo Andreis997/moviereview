@@ -32,7 +32,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
               "No user found with username: " + username);
         }
         
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), getAuthorities(user.getRole()));
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), getAuthorities(user.getRoles()));
     }
      
     private static List<GrantedAuthority> getAuthorities (List<String> roles) {
