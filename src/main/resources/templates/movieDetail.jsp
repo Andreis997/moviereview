@@ -57,27 +57,6 @@ a[href], a[href]:hover {
 .starrating>input:hover ~ label {
 	color: #ffca08;
 } /* Set yellow color when star hover */
-#module {
-	width: 500px;
-}
-
-#module p.collapse[aria-expanded="false"] {
-	display: block;
-	height: 40px !important;
-	overflow: hidden;
-}
-
-#module p.collapsing[aria-expanded="false"] {
-	height: 40px !important;
-}
-
-#module a.collapsed:after {
-	content: '+ Show More';
-}
-
-#module a:not (.collapsed ):after {
-	content: '- Show Less';
-}
 </style>
 </head>
 <body>
@@ -132,10 +111,8 @@ a[href], a[href]:hover {
 				<div class="col-4 mx-auto"
 					th:each="review: ${currentMovie.getReviews()}">
 					<div class="card card-body mb-2">
-						<div class="module">
-							<h6>Review</h6>
-							<p th:text="${review.getContent()}"></p>
-						</div>
+						<h6>Review</h6>
+						<p th:text="${review.getContent()}"></p>
 					</div>
 				</div>
 			</div>
