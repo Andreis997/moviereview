@@ -28,3 +28,5 @@ ALTER TABLE `reviews`
 	ADD CONSTRAINT `review_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
 	
 INSERT INTO reviews (movie_id_api, user_id, content) VALUES (545609, 4, "Foarte bun") 
+
+ALTER TABLE users ADD role varchar(255);
