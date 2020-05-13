@@ -109,4 +109,9 @@ public class Movie {
 		this.externalReviews = externalReviews;
 	}
 	
+	public String getAverageStyle() {
+		double a = Double.parseDouble(this.voteAverage) * 10;
+		return  "width: " + a + "%";
+	}
+	
 }
