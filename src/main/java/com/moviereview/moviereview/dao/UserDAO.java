@@ -82,7 +82,7 @@ public class UserDAO {
            ResultSet resultSet = preparedStatement.executeQuery();
 
            if (resultSet.next()) {
-        	   User user = new User(resultSet.getInt("id"), resultSet.getString("username"), resultSet.getNString("email"), resultSet.getNString("password"));
+        	   User user = new User(resultSet.getInt("id"), resultSet.getString("username"), resultSet.getNString("email"), resultSet.getNString("password"), resultSet.getString("role"));
         	   resultSet.close();
                return user;
            }
@@ -101,7 +101,7 @@ public class UserDAO {
            ResultSet resultSet = preparedStatement.executeQuery();
 
            if (resultSet.next()) {
-        	   User user = new User(resultSet.getInt("id"), resultSet.getString("username"), resultSet.getNString("email"), resultSet.getNString("password"));
+        	   User user = new User(resultSet.getInt("id"), resultSet.getString("username"), resultSet.getNString("email"), resultSet.getNString("password"), resultSet.getString("role"));
         	   resultSet.close();
                return user;
            }
@@ -120,7 +120,7 @@ public class UserDAO {
            ResultSet resultSet = preparedStatement.executeQuery();
 
            if (resultSet.next()) {
-        	   User user = new User(resultSet.getInt("id"), resultSet.getString("username"), resultSet.getNString("email"), resultSet.getNString("password"));
+        	   User user = new User(resultSet.getInt("id"), resultSet.getString("username"), resultSet.getNString("email"), resultSet.getNString("password"), resultSet.getString("role"));
         	   resultSet.close();
                return user;
            }

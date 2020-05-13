@@ -22,7 +22,11 @@ public class MovieController {
 
 	@RequestMapping(value = "/movieDetail", method = RequestMethod.GET)
 	public ModelAndView movieDetail(@ModelAttribute("id") String id, BindingResult result, ModelMap model) {
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
+		UserDetails s = ((UserDetails) principal);
+		User user = UserDAO.getInstance().findUserByUsername(s.getUsername());
+		
 		if (result.hasErrors()) {
 			System.out.println("err");
 		}
@@ -32,6 +36,7 @@ public class MovieController {
 		Movie movie = MovieApi.getMovie(id);
 		modelAndView.addObject("currentMovie", movie);
 		modelAndView.addObject("movieId", id);
+		modelAndView.addObject("user", user);
 
 		return modelAndView;
 	}
