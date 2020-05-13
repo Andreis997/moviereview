@@ -36,6 +36,9 @@
 
 <div class="container bg-faded">
     <h1 class="text-center" th:text="${currentMovie.getTitle()}"></h1>
+    <div class="progress">
+  		<div class="progress-bar bg-success" role="progressbar" style="width: 65%" th:aria-valuenow="${currentMovie.getVoteAverage()}" aria-valuemin="0" aria-valuemax="60"></div>
+	</div>
     <div class="row">
         <div class="col text-center" th:text="${currentMovie.getVoteAverage()}">Rating</div>
     </div>
@@ -62,6 +65,7 @@
             <div class="card card-body mb-2">
                 <h6 >Review </h6>
                 <code th:text="${review.getContent()}"></code>
+                
             </div>
         </div>
     </div>
@@ -75,20 +79,22 @@
                 <h6 th:text="${review.getAuthor()}"></h6>
                 <code th:text="${review.getContent()}"></code>
             </div>
+
         </div>
+        
         
     </div>
     
-             <h4 class="text-center">Submit a review</h4>
+             <h4 class="text-center" style="padding-top:50px">Submit a review</h4>
              
-    <div class="row">
+    <div class="row" style="padding-bottom:100px">
 
 		<form class="col-md-12" method="POST" th:action="@{/addReview(id=${movieId})}">
 		  <div class="form-group " >
 		    <label for="exampleFormControlTextarea1"></label>
 		    <textarea class="form-control" id="reviewArea" rows="3" th:name="review"></textarea>
 		  </div>
-		  <button type="submit" class="btn btn-primary col-md-12">Submit</button>
+		  <button type="submit" class="btn btn-primary col-md-12" >Submit</button>
 		</form>
 
     </div>
