@@ -6,10 +6,18 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.theme.min.css">
 <!-- jQuery library -->
 <script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+  src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+  integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+  crossorigin="anonymous"></script>
 <!-- Popper JS -->
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -68,14 +76,16 @@ a.custom-card, a.custom-card:hover {
 </style>
 </head>
 <body>
-	<nav class="navbar navbar-light bg-light justify-content-between navbar-dark bg-dark">
+	<nav
+		class="navbar navbar-light bg-light justify-content-between navbar-dark bg-dark">
 		<a class="navbar-brand">MovieReview</a>
-		
+
 		<form class="form-inline" action="search">
-			<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+			<input class="form-control mr-sm-2" type="search" id="search"
+				placeholder="Search" aria-label="Search">
 			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 		</form>
-		
+
 		<form class="form-inline" action="logout">
 			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button>
 		</form>
@@ -90,7 +100,7 @@ a.custom-card, a.custom-card:hover {
 						class="custom-card"> <img th:src="${movie.getPosterPath()}"
 						alt="Movie" style="width: 100%" class="card-img-top">
 						<div class="card-body container">
-							<br>	
+							<br>
 							<h5 class="card-title" th:text="${movie.getTitle()}"></h5>
 							<h6 class="card-subtitle mb-2 text-muted"
 								th:text="${movie.getRelease_date()}"></h6>
@@ -101,5 +111,38 @@ a.custom-card, a.custom-card:hover {
 			</div>
 		</div>
 	</div>
+	<script>
+            $("#search").autocomplete({
+                source: function (request, response) {
+                    let data = {
+                        name: request.term,
+                    };
+                    $.ajax({
+                        type: 'GET',
+                        contentType: "application/json; charset=utf-8",
+                        url: "https://api.themoviedb.org/3/search/movie?api_key=453e1204c2a33c24cb0a877e6c23a1c3&language=en-US&query=" + request.term + "&page=1&include_adult=false",
+                        success: function (data) {
+                            response(
+                                $.map(data.results,
+                                    function (item) {
+                                        const AC = {};
+
+                                        //autocomplete default values REQUIRED
+                                        AC.label = item.original_title;
+                                        AC.value = item.original_title;
+                                        AC.id = item.id;
+
+                                        return AC
+                                    }));
+                        }
+                    });
+                },
+                minLength: 3,
+                delay: 100,
+                select: function (event, ui) {
+                	window.location.href = "/movieDetail/?id=" + ui.item.id;
+                }
+            });
+	</script>
 </body>
 </html>

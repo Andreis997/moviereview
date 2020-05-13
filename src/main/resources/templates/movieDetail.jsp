@@ -2,10 +2,18 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.ui-menu, ui-autocomplete-input, form-control {
+	background-color: black;
+}
+</style>
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.theme.min.css">
 <!-- jQuery library -->
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -17,8 +25,7 @@
 <!-- Latest compiled JavaScript -->
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-<style>
-</style>
+
 </head>
 <body>
 
@@ -102,7 +109,8 @@
 
 		<div class="row" style="padding-bottom: 100px">
 
-			<form class="col-md-12" method="POST" th:if='${user.getRole().equals("Premium")}'
+			<form class="col-md-12" method="POST"
+				th:if='${user.getRole().equals("Premium")}'
 				th:action="@{/addReview(id=${movieId})}">
 				<div class="form-group ">
 					<label for="exampleFormControlTextarea1"></label>
@@ -111,7 +119,8 @@
 				</div>
 				<button type="submit" class="btn btn-primary col-md-12">Submit</button>
 			</form>
-			<span th:unless='${user.getRole().equals("Premium")}'>Vrei sa adaugi un Review? Devino user premium</span>
+			<span th:unless='${user.getRole().equals("Premium")}'>Vrei sa
+				adaugi un Review? Devino user premium</span>
 
 		</div>
 
