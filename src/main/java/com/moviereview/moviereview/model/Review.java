@@ -9,13 +9,15 @@ public class Review {
     private User user;
     private String content;
     private Date createdAt;
+    private String rating;
 	
-    public Review(int id, int movieIdApi, User user, String content, Date createdAt) {
+    public Review(int id, int movieIdApi, User user, String content, Date createdAt, String rating) {
 		this.id = id;
 		this.movieIdApi = movieIdApi;
 		this.user = user;
 		this.content = content;
 		this.createdAt = createdAt;
+		this.rating = rating;
 	}
     
 	public int getMovieIdApi() {
@@ -48,5 +50,13 @@ public class Review {
 	
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
+	}
+	
+	public String getRating() {
+		return rating;
+	}
+	
+	public void setRating(String rating) {
+		this.rating = rating;
 	}
 }

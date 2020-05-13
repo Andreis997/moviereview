@@ -37,7 +37,7 @@ public class ReviewDAO {
             
             while (rs.next()) {
             	reviews.add(new Review(rs.getInt("id"), rs.getInt("movie_id_api"), UserDAO.getInstance().findUserById(rs.getInt("user_id")),
-            			rs.getString("content"), rs.getDate("created_at")));
+            			rs.getString("content"), rs.getDate("created_at"), rs.getString("rating")));
             }
             
         } catch (SQLException e) {
@@ -46,12 +46,13 @@ public class ReviewDAO {
         return reviews;
     }
 	
-	public boolean createReview(int movieIdApi, User user, String content) {
+	public boolean createReview(int movieIdApi, User user, String content, String rating) {
 		try {
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO reviews (movie_id_api, user_id, content) VALUES (?, ?, ?)");
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO reviews (movie_id_api, user_id, content, rating) VALUES (?, ?, ?, ?)");
             preparedStatement.setInt(1, movieIdApi);
             preparedStatement.setInt(2, user.getId());
             preparedStatement.setString(3, content);
+            preparedStatement.setString(4, rating);
             preparedStatement.executeUpdate();
             connection.commit();
             return true;

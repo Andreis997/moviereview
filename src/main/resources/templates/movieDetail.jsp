@@ -2,18 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-.ui-menu, ui-autocomplete-input, form-control {
-	background-color: black;
-}
-</style>
+
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.theme.min.css">
 <!-- jQuery library -->
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -26,6 +20,44 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
+<style>
+@import
+	url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
+/* Styling h1 and links
+––––––––––––––––––––––––––––––––– */
+h1[alt="Simple"] {
+	color: white;
+}
+
+a[href], a[href]:hover {
+	color: grey;
+	font-size: 0.5em;
+	text-decoration: none
+}
+
+.starrating>input {
+	display: none;
+} /* Remove radio buttons */
+.starrating>label:before {
+	content: "\f005"; /* Star */
+	margin: 2px;
+	font-size: 8em;
+	font-family: FontAwesome;
+	display: inline-block;
+}
+
+.starrating>label {
+	color: #222222; /* Start color when not clicked */
+}
+
+.starrating>input:checked ~ label {
+	color: #ffca08;
+} /* Set yellow color when star checked */
+.starrating>input:hover ~ label {
+	color: #ffca08;
+} /* Set yellow color when star hover */
+</style>
 </head>
 <body>
 
@@ -116,6 +148,20 @@
 					<label for="exampleFormControlTextarea1"></label>
 					<textarea class="form-control" id="reviewArea" rows="3"
 						th:name="review"></textarea>
+					<div class="">
+						<div
+							class="starrating risingstar d-flex justify-content-center flex-row-reverse">
+							<input type="radio" id="star5" name="rating" value="5" /><label
+								for="star5" title="5 star">5</label> <input type="radio"
+								id="star4" name="rating" value="4" /><label for="star4"
+								title="4 star">4</label> <input type="radio" id="star3"
+								name="rating" value="3" /><label for="star3" title="3 star">3</label>
+							<input type="radio" id="star2" name="rating" value="2" /><label
+								for="star2" title="2 star">2</label> <input type="radio"
+								id="star1" name="rating" value="1" /><label for="star1"
+								title="1 star">1</label>
+						</div>
+					</div>
 				</div>
 				<button type="submit" class="btn btn-primary col-md-12">Submit</button>
 			</form>

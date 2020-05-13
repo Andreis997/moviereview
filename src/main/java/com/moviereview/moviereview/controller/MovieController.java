@@ -42,13 +42,13 @@ public class MovieController {
 	}
 
 	@RequestMapping(value = "/addReview", method = RequestMethod.POST)
-	public ModelAndView addReview(@ModelAttribute("id") String id, @RequestParam("review") String review,
+	public ModelAndView addReview(@ModelAttribute("id") String id, @RequestParam("review") String review, @RequestParam("rating") String rating,
 			BindingResult result, ModelMap model) {
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
 		UserDetails s = ((UserDetails) principal);
 		User u = UserDAO.getInstance().findUserByUsername(s.getUsername());
-		ReviewDAO.getInstance().createReview(Integer.valueOf(id), u, review);
+		ReviewDAO.getInstance().createReview(Integer.valueOf(id), u, review, rating);
 
 		return new ModelAndView("redirect:movieDetail?id=" + id);
 	}
