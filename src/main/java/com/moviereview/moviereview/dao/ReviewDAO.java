@@ -61,4 +61,17 @@ public class ReviewDAO {
         }
         return false;
 	}
+	
+	public boolean deleteReview(int movieIdApi) {
+		try {
+            PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM reviews WHERE id=?");
+            preparedStatement.setInt(1, movieIdApi);
+            preparedStatement.executeUpdate();
+            connection.commit();
+            return true;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+	}
 }

@@ -52,5 +52,12 @@ public class MovieController {
 
 		return new ModelAndView("redirect:movieDetail?id=" + id);
 	}
+	
+	@RequestMapping(value = "/deleteReview", method = RequestMethod.GET)
+	public ModelAndView addReview(@ModelAttribute("id") String id, @ModelAttribute("idMovie") String idMovie, BindingResult result, ModelMap model) {
+		ReviewDAO.getInstance().deleteReview(Integer.valueOf(id));
+		
+		return new ModelAndView("redirect:movieDetail?id=" + idMovie);
+	}
 
 }

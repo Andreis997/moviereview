@@ -106,18 +106,20 @@ a[href], a[href]:hover {
 		<hr>
 		<h4 class="text-center">Reviews from MovieReview users</h4>
 
-		<div th:if='${user.getRole().equals("Premium")}'>
+		<div th:if='${user.getRole().equals("Premium") or user.getRole().equals("Admin")}'>
 			<div class="row">
 				<div class="col-4 mx-auto"
 					th:each="review: ${currentMovie.getReviews()}">
 					<div class="card card-body mb-2">
+						<a th:href="@{/deleteReview(id=${review.getId()}, idMovie=${currentMovie.getId()})}" class="btn btn-danger"
+							th:if='${user.getRole().equals("Admin")}'>DELETE</a>
 						<h6>Review</h6>
 						<p th:text="${review.getContent()}"></p>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div th:unless='${user.getRole().equals("Premium")}'>
+		<div th:unless='${user.getRole().equals("Premium") or user.getRole().equals("Admin")}'>
 			<span>Only premium users can see reviews</span>
 		</div>
 		<hr>
@@ -142,7 +144,7 @@ a[href], a[href]:hover {
 		<div class="row" style="padding-bottom: 100px">
 
 			<form class="col-md-12" method="POST"
-				th:if='${user.getRole().equals("Premium")}'
+				th:if='${user.getRole().equals("Premium") or user.getRole().equals("Admin")}'
 				th:action="@{/addReview(id=${movieId})}">
 				<div class="form-group ">
 					<label for="exampleFormControlTextarea1"></label>
@@ -165,7 +167,7 @@ a[href], a[href]:hover {
 				</div>
 				<button type="submit" class="btn btn-primary col-md-12">Submit</button>
 			</form>
-			<span th:unless='${user.getRole().equals("Premium")}'>Vrei sa
+			<span th:unless='${user.getRole().equals("Premium") or user.getRole().equals("Admin")}'>Vrei sa
 				adaugi un Review? Devino user premium</span>
 
 		</div>
