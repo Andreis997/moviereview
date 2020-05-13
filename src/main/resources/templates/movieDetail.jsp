@@ -37,7 +37,7 @@
 <div class="container bg-faded">
     <h1 class="text-center" th:text="${currentMovie.getTitle()}"></h1>
     <div class="progress">
-  		<div class="progress-bar bg-success" role="progressbar" style="width: 65%" th:aria-valuenow="${currentMovie.getVoteAverage()}" aria-valuemin="0" aria-valuemax="60"></div>
+  		<div class="progress-bar bg-success" role="progressbar" style="width: ${currentMovie.getVoteAverage()*10}%" th:aria-valuenow="${currentMovie.getVoteAverage()}" aria-valuemin="0" aria-valuemax="60"></div>
 	</div>
     <div class="row">
         <div class="col text-center" th:text="${currentMovie.getVoteAverage()}">Rating</div>
