@@ -9,6 +9,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
@@ -80,10 +81,15 @@ public class AuthenticationController {
 	public ModelAndView index() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		UserDetails s = ((UserDetails) principal);
+		User user = UserDAO.getInstance().findUserByUsername(s.getUsername());
+		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("home");
 		modelAndView.addObject("user", auth.getName());
 		modelAndView.addObject("roles", auth.getAuthorities());
+		modelAndView.addObject("user", user);
 		
 		List<Movie> movies = MovieApi.getPopularMovies();
 		modelAndView.addObject("movies", movies);

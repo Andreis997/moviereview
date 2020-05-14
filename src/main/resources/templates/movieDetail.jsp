@@ -50,7 +50,19 @@ a[href], a[href]:hover {
 .starrating>label {
 	color: #222222; /* Start color when not clicked */
 }
-
+ .navbar {
+  min-height: 80px;
+}
+.navbar-brand{
+    color: white !important;
+    font-size: 3.0em !important;
+    
+}
+#navbarNav {
+    color: white !important;
+    font-size: 4.0em !important;
+    
+    }
 .starrating>input:checked ~ label {
 	color: #ffca08;
 } /* Set yellow color when star checked */
@@ -61,21 +73,31 @@ a[href], a[href]:hover {
 </head>
 <body>
 
-	<nav
-		class="navbar navbar-light bg-light justify-content-between navbar-dark bg-dark">
-		<a class="navbar-brand">MovieReview</a>
-		<form class="form-inline" action="search">
-			<input class="form-control mr-sm-2" type="search"
-				placeholder="Search" aria-label="Search">
-			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-		</form>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	  <a class="navbar-brand" href="/home">MovieReview</a>
+	  
+	  <div class="collapse navbar-collapse " id="navbarNav">
+	    <ul class="navbar-nav">
+	      <li class="nav-item active">
+	        <a class="nav-link" href="/home">Popular Movies <span class="sr-only">(current)</span></a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="/actors">Popular actors</a>
+	      </li>
+	      <li class="nav-item">
+	      <a class="nav-link" href="/admin"
+							th:if='${user.getRole().equals("Admin")}'>Admin Page</a>
+	      </li>
+	    </ul>
 
+	  </div>
+		
 		<form class="form-inline" action="logout">
 			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button>
 		</form>
 	</nav>
 
-	<div class="container bg-faded">
+	<div class="container bg-faded col-md-8">
 		<h1 class="text-center" th:text="${currentMovie.getTitle()}"></h1>
 		<div class="progress">
 			<div class="progress-bar bg-success" role="progressbar"
@@ -89,20 +111,22 @@ a[href], a[href]:hover {
 		</div>
 		<hr>
 		<div class="row">
-			<div class="col">
-				<div class="mx-auto w-50 p-3 bg-dark text-white text-center">
-					<span th:text="${currentMovie.getOverview()}"></span>
-				</div>
+			<div class="col md-6">
+				<div class="card flex-md-row mb-4 box-shadow h-md-250">
+		            <div class="card-body d-flex flex-column align-items-start">
+		              <strong class="d-inline-block mb-2 text-primary">Description</strong>
+			              <!--  <h3 class="mb-0">
+			                <a class="text-dark" href="#">Featured post</a>
+			              </h3>-->
+			              <!--<div class="mb-1 text-muted">Nov 12</div>-->
+			              <p class="card-text mb-auto" style="font-size:30px"	 th:text="${currentMovie.getOverview()}"></p>
+		            </div>
+	            <img class="card-img-right flex-auto d-none d-md-block" th:src="${currentMovie.getPosterPath()}" alt="Movie" style="width: 450px; height: 400px;" data-holder-rendered="true">
+	           </div>
 			</div>
+			
 		</div>
-		<hr>
-		<div class="row">
-			<div class="col-12">
-				<img th:src="${currentMovie.getPosterPath()}" alt="Movie"
-					class="card-img-top mx-auto w-50">
 
-			</div>
-		</div>
 		<hr>
 		<h4 class="text-center">Reviews from MovieReview users</h4>
 
@@ -111,10 +135,10 @@ a[href], a[href]:hover {
 				<div class="col-4 mx-auto"
 					th:each="review: ${currentMovie.getReviews()}">
 					<div class="card card-body mb-2">
-						<a th:href="@{/deleteReview(id=${review.getId()}, idMovie=${currentMovie.getId()})}" class="btn btn-danger"
+						<a th:href="@{/deleteReview(id=${review.getId()}, idMovie=${currentMovie.getId()})}" class="btn btn-danger" style="font-size:25px ;color:white"
 							th:if='${user.getRole().equals("Admin")}'>DELETE</a>
-						<h6>Review</h6>
-						<p th:text="${review.getContent()}"></p>
+						<p th:text="${review.getRating()}" style="font-size:25px"></p>
+						<p th:text="${review.getContent()}" style="font-size:25px"></p>
 					</div>
 				</div>
 			</div>
@@ -129,9 +153,8 @@ a[href], a[href]:hover {
 			<div class="col-4 mx-auto"
 				th:each="review: ${currentMovie.getExternalReviews()}">
 				<div class="card card-body mb-2">
-					<h6>Review 1</h6>
 					<h6 th:text="${review.getAuthor()}"></h6>
-					<p class="comment" th:text="${review.getContent()}"></p>
+					<p class="comment " style="font-size:25px" th:text="${review.getContent()}"></p>
 				</div>
 
 			</div>
@@ -168,7 +191,7 @@ a[href], a[href]:hover {
 				<button type="submit" class="btn btn-primary col-md-12">Submit</button>
 			</form>
 			<span th:unless='${user.getRole().equals("Premium") or user.getRole().equals("Admin")}'>Vrei sa
-				adaugi un Review? Devino user premium</span>
+				adaugi un Review? Devin-o user premium</span>
 
 		</div>
 

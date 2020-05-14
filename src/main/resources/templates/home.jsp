@@ -54,13 +54,24 @@ html {
 .container {
 	padding: 0 16px;
 }
-
+.navbar-brand{
+    color: white !important;
+    font-size: 2.9em !important;
+    
+}
+#navbarNav {
+    color: white !important;
+    font-size: 1.9em !important;
+    
+    }
 .container::after, .row::after {
 	content: "";
 	clear: both;
 	display: table;
 }
-
+ .navbar {
+  min-height: 80px;
+}
 .title {
 	color: grey;
 }
@@ -76,21 +87,36 @@ a.custom-card, a.custom-card:hover {
 </style>
 </head>
 <body>
-	<nav
-		class="navbar navbar-light bg-light justify-content-between navbar-dark bg-dark">
-		<a class="navbar-brand">MovieReview</a>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	  <a class="navbar-brand" href="/home">MovieReview</a>
+	  
+	  <div class="collapse navbar-collapse" id="navbarNav">
+	    <ul class="navbar-nav">
+	      <li class="nav-item active">
+	        <a class="nav-link" href="/home">Popular Movies <span class="sr-only">(current)</span></a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="/actors">Popular actors</a>
+	      </li>
+	      <li class="nav-item">
+	        	      <a class="nav-link" href="/admin"
+							th:if='${user.getRole().equals("Admin")}'>Admin Page</a>
+	      </li>
+	    </ul>
 
+	  </div>
 		<form class="form-inline" action="search">
 			<input class="form-control mr-sm-2" type="search" id="search"
 				placeholder="Search" aria-label="Search">
 			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 		</form>
-
+		
 		<form class="form-inline" action="logout">
 			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button>
 		</form>
 	</nav>
-	<h2 style="text-align: center">Top trending movies</h2>
+
+	<h1 style="text-align: center">Top trending movies</h1>
 	<div class="container">
 		<div class="row">
 			<div class="col-md-4 d-flex align-items-stretch"

@@ -26,7 +26,9 @@ body {
 html {
 	box-sizing: border-box;
 }
-
+ .navbar {
+  min-height: 80px;
+}
 *, *:before, *:after {
 	box-sizing: inherit;
 }
@@ -56,7 +58,16 @@ html {
 .title {
 	color: grey;
 }
-
+.navbar-brand{
+    color: white !important;
+    font-size: 2.9em !important;
+    
+}
+#navbarNav {
+    color: white !important;
+    font-size: 1.9em !important;
+    
+    }
 .card:hover {
 	background-color: #DCDCDC;
 }
@@ -68,13 +79,23 @@ a.custom-card, a.custom-card:hover {
 </style>
 </head>
 <body>
-	<nav class="navbar navbar-light bg-light justify-content-between navbar-dark bg-dark">
-		<a class="navbar-brand">MovieReview</a>
-		
-		<form class="form-inline" action="search">
-			<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-		</form>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	  <a class="navbar-brand" href="/home">MovieReview</a>
+	  
+	  <div class="collapse navbar-collapse" id="navbarNav">
+	    <ul class="navbar-nav">
+	      <li class="nav-item active">
+	        <a class="nav-link" href="/home">Popular Movies <span class="sr-only">(current)</span></a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="/actors">Popular actors</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="/admin">Admin Page</a>
+	      </li>
+	    </ul>
+
+	  </div>
 		
 		<form class="form-inline" action="logout">
 			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button>
@@ -93,9 +114,10 @@ a.custom-card, a.custom-card:hover {
 								th:text="${user.getRole()}"></h6>
 							<br>
 							<div class="btn-group" role="group" aria-label="Basic example">
-							  <button type="button" class="btn btn-secondary">Make Admin</button>
-							  <button type="button" class="btn btn-secondary">Make Premium</button>
-							  <button type="button" class="btn btn-secondary">Make Normal</button>
+							  
+							  <button type="button" class="btn btn-secondary" th:if='${user.getRole().equals("Normal") or user.getRole().equals("Admin")}'>Make Premium</button>
+							  <button type="button" class="btn btn-secondary" th:if='${user.getRole().equals("Premium") or user.getRole().equals("Admin")}'>Make Normal</button>
+							  <button type="button" class="btn btn-secondary" th:if='${user.getRole().equals("Premium")or user.getRole().equals("Normal")}'>Make Admin</button>
 							</div>
 						</div>
 				</div>
