@@ -11,11 +11,30 @@ import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.moviereview.moviereview.model.Actor;
 import com.moviereview.moviereview.model.ExternalReview;
 import com.moviereview.moviereview.model.Movie;
 
 public class MovieApi {
 	private static final String apiUrl = "https://api.themoviedb.org/3";
+	
+	public static List<Actor> getPopularActors() {
+		List<Actor> actors = new ArrayList<Actor>();
+		try {
+			ObjectMapper mapper = new ObjectMapper();
+			JsonNode jsonNode = mapper.readTree(executeRestTemplate("/person/popular"));
+			JsonNode resultsNode = jsonNode.get("results");
+			for (JsonNode resultNode : resultsNode) {
+				actors.add(new Actor(resultNode.get("id").asInt(),
+										resultNode.get("name").textValue(),
+										resultNode.get("known_for_department").textValue(),
+										resultNode.get("profile_path").textValue()));
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return actors;
+	}
 
 	public static List<Movie> getPopularMovies() {
 		List<Movie> movies = new ArrayList<Movie>();
