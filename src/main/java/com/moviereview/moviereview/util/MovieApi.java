@@ -42,13 +42,22 @@ public class MovieApi {
 		try {
 			ObjectMapper mapper = new ObjectMapper();
 			JsonNode resultNode = mapper.readTree(executeRestTemplate("/movie/" + id));
+			JsonNode genresNode = resultNode.get("genres");
+			
+			ArrayList<String> genres = new ArrayList<String>();
+			for (JsonNode rn : genresNode)  {
+				genres.add(rn.get("name").textValue());
+			}
 			
 			movie = new Movie(resultNode.get("id").asInt(),
 										resultNode.get("title").textValue(),
 										String.valueOf(resultNode.get("vote_average").asDouble()),
 										resultNode.get("overview").textValue(),
 										resultNode.get("release_date").textValue(),
-										resultNode.get("poster_path").textValue());
+										resultNode.get("poster_path").textValue(),
+										Long.toString(resultNode.get("budget").asLong()),
+										resultNode.get("original_language").textValue(),
+										genres);
 			
 			List<ExternalReview> l = new ArrayList<>();
 			resultNode = mapper.readTree(executeRestTemplate("/movie/" + id + "/reviews"));

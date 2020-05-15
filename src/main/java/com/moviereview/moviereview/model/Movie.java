@@ -16,12 +16,16 @@ public class Movie {
 	private List<Review> reviews;
 	private List<ExternalReview> externalReviews;
 	private float averageReviewRating;
+	private String budget;
+	private String originalLanguage;
+	private List<String> genres; 
 	
 	public Movie(int id, String title, String voteAverage, String overview, String release_date, String posterPath) {
-		this(id,title, voteAverage,overview, release_date, posterPath, null);
+		this(id,title, voteAverage,overview, release_date, posterPath, null, null, null);
 	}
 	
-	public Movie(int id, String title, String voteAverage, String overview, String release_date, String posterPath, List<ExternalReview> externalReviews) {
+	public Movie(int id, String title, String voteAverage, String overview, String release_date, String posterPath,
+			String budget, String originalLanguage, List<String> genres) {
 		this.id = id;
 		this.title = title;
 		this.voteAverage = voteAverage;
@@ -29,7 +33,9 @@ public class Movie {
 		this.release_date = release_date;
 		this.posterPath = posterPath;
 		this.reviews = new ArrayList<>();
-		this.externalReviews = externalReviews;
+		this.budget = budget;
+		this.originalLanguage = originalLanguage;
+		this.genres = genres;
 	}
 
 	public int getId() {
@@ -131,6 +137,30 @@ public class Movie {
 	
 	public void setAverageReviewRating(float averageReviewRating) {
 		this.averageReviewRating = averageReviewRating;
+	}
+
+	public String getBudget() {
+		return budget;
+	}
+
+	public void setBudget(String budget) {
+		this.budget = budget;
+	}
+
+	public String getOriginalLanguage() {
+		return originalLanguage;
+	}
+
+	public void setOriginalLanguage(String originalLanguage) {
+		this.originalLanguage = originalLanguage;
+	}
+
+	public List<String> getGenres() {
+		return genres;
+	}
+
+	public void setGenres(List<String> genres) {
+		this.genres = genres;
 	}
 	
 }
