@@ -15,6 +15,7 @@ public class Movie {
 	private String posterPath;
 	private List<Review> reviews;
 	private List<ExternalReview> externalReviews;
+	private float averageReviewRating;
 	
 	public Movie(int id, String title, String voteAverage, String overview, String release_date, String posterPath) {
 		this(id,title, voteAverage,overview, release_date, posterPath, null);
@@ -91,9 +92,19 @@ public class Movie {
 	}
 	
 	public List<Review> getReviews() {
+		float averageRating = 0;
+        int numberOfReviews = 0;
+        
 		if (reviews.isEmpty()) {
 			reviews = ReviewDAO.getInstance().getAllReviewsOfMovie(this.id);
+			
 		}
+		for(Review review : reviews) {
+			averageRating += Integer.valueOf(review.getRating());
+	    	numberOfReviews++;
+		}
+        averageRating = averageRating / numberOfReviews;
+        setAverageReviewRating(averageRating);
 		return reviews;
 	}
 	
@@ -112,6 +123,14 @@ public class Movie {
 	public String getAverageStyle() {
 		double a = Double.parseDouble(this.voteAverage) * 10;
 		return  "width: " + a + "%";
+	}
+	
+	public float getAverageReviewRating() {
+		return averageReviewRating;
+	}
+	
+	public void setAverageReviewRating(float averageReviewRating) {
+		this.averageReviewRating = averageReviewRating;
 	}
 	
 }
