@@ -126,8 +126,7 @@ a[href], a[href]:hover {
 	            		<p th:text="${currentMovie.getOriginalLanguage()}" style="font-size:25px"></p>
 	            		<strong class="d-inline-block mb-2 text-primary">Genres</strong>
 	            		<p th:text="${currentMovie.getGenres()}" style="font-size:25px"></p>
-	            		<strong class="d-inline-block mb-2 text-primary">Average rating</strong>
-	            		<p th:text="${currentMovie.getAverageReviewRating()}" style="font-size:25px"></p>
+	            		
 	            		
 		            </div>
 		            
@@ -140,15 +139,16 @@ a[href], a[href]:hover {
 
 		<hr>
 		<h4 class="text-center">Reviews from MovieReview users</h4>
-
 		<div th:if='${user.getRole().equals("Premium") or user.getRole().equals("Admin")}'>
 			<div class="row">
 				<div class="col-4 mx-auto"
 					th:each="review: ${currentMovie.getReviews()}">
+					
 					<div class="card card-body mb-2">
+					Average review rating<p th:text="${currentMovie.getAverageReviewRating()}" style="font-size:25px"></p>
 						<a th:href="@{/deleteReview(id=${review.getId()}, idMovie=${currentMovie.getId()})}" class="btn btn-danger" style="font-size:25px ;color:white"
 							th:if='${user.getRole().equals("Admin")}'>DELETE</a>
-						<p th:text="${review.getRating()}" style="font-size:25px"></p>
+						Rating<p th:text="${review.getRating()}" style="font-size:25px"></p>
 						<p th:text="${review.getContent()}" style="font-size:25px"></p>
 					</div>
 				</div>
