@@ -15,7 +15,7 @@
 	<body style="background-color:#ededed;">
 		<div style="background-color:#343a40!important;;height:80px;"></div>
 		<div class="container-fluid">
-			<div class="row col-lg-4 col-lg-offset-4" style="margin-top: 400px;background-color:#fff;padding:20px;border:solid 4px #ddd;">
+			<div class="row col-lg-4 col-lg-offset-4" style="margin-top: 100px;background-color:#fff;padding:20px;border:solid 4px #ddd;">
 				<!-- <img th:src="@{/images/login.jpg}" class="img-responsive center-block" width="300" height="300" alt="Logo" /> -->
 				<form th:action="@{/login}" method="POST" class="form-signin">
 					<h3 class="form-signin-heading" th:text="Login" style="font-size:45px"></h3> <br /> 

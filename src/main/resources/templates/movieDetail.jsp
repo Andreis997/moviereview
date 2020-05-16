@@ -120,8 +120,19 @@ a[href], a[href]:hover {
 			              </h3>-->
 			              <!--<div class="mb-1 text-muted">Nov 12</div>-->
 			              <p class="card-text mb-auto" style="font-size:30px"	 th:text="${currentMovie.getOverview()}"></p>
+		            	<strong class="d-inline-block mb-2 text-primary">Budget</strong>
+	            		<p th:text="${currentMovie.getBudget()}" style="font-size:25px"></p>
+	            		<strong class="d-inline-block mb-2 text-primary">Original language</strong>
+	            		<p th:text="${currentMovie.getOriginalLanguage()}" style="font-size:25px"></p>
+	            		<strong class="d-inline-block mb-2 text-primary">Genres</strong>
+	            		<p th:text="${currentMovie.getGenres()}" style="font-size:25px"></p>
+	            		<strong class="d-inline-block mb-2 text-primary">Average rating</strong>
+	            		<p th:text="${currentMovie.getAverageReviewRating()}" style="font-size:25px"></p>
+	            		
 		            </div>
-	            <img class="card-img-right flex-auto d-none d-md-block" th:src="${currentMovie.getPosterPath()}" alt="Movie" style="width: 450px; height: 400px;" data-holder-rendered="true">
+		            
+	            <img class="card-img-right flex-auto d-none d-md-block" th:src="${currentMovie.getPosterPath()}" alt="Movie" style="width: 450px; height: 500px;" data-holder-rendered="true">
+
 	           </div>
 			</div>
 			
