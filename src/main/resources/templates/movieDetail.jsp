@@ -24,8 +24,7 @@
 @import
 	url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
 
-/* Styling h1 and links
-––––––––––––––––––––––––––––––––– */
+/* Styling h1 and links�� */
 h1[alt="Simple"] {
 	color: white;
 }
@@ -126,8 +125,8 @@ a[href], a[href]:hover {
 	            		<p th:text="${currentMovie.getOriginalLanguage()}" style="font-size:25px"></p>
 	            		<strong class="d-inline-block mb-2 text-primary">Genres</strong>
 	            		<p th:text="${currentMovie.getGenres()}" style="font-size:25px"></p>
-	            		
-	            		
+	            		<strong class="d-inline-block mb-2 text-primary">Average rating</strong>
+	            		<p th:text="${currentMovie.getAverageReviewRating()}" style="font-size:25px"></p>
 		            </div>
 		            
 	            <img class="card-img-right flex-auto d-none d-md-block" th:src="${currentMovie.getPosterPath()}" alt="Movie" style="width: 450px; height: 500px;" data-holder-rendered="true">
@@ -145,7 +144,6 @@ a[href], a[href]:hover {
 					th:each="review: ${currentMovie.getReviews()}">
 					
 					<div class="card card-body mb-2">
-					Average review rating<p th:text="${currentMovie.getAverageReviewRating()}" style="font-size:25px"></p>
 						<a th:href="@{/deleteReview(id=${review.getId()}, idMovie=${currentMovie.getId()})}" class="btn btn-danger" style="font-size:25px ;color:white"
 							th:if='${user.getRole().equals("Admin")}'>DELETE</a>
 						Rating<p th:text="${review.getRating()}" style="font-size:25px"></p>

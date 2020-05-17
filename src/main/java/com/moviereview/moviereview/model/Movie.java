@@ -132,6 +132,7 @@ public class Movie {
 	}
 	
 	public float getAverageReviewRating() {
+		this.getReviews();
 		return averageReviewRating;
 	}
 	
