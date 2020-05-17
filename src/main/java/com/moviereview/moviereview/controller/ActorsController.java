@@ -16,7 +16,7 @@ import com.moviereview.moviereview.util.MovieApi;
 @RestController 
 public class ActorsController {
 
-	@GetMapping({"/", "/actors"})
+	@GetMapping({"/actors"})
 	public ModelAndView index() {
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		UserDetails s = ((UserDetails) principal);
