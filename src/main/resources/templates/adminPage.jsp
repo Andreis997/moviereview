@@ -114,10 +114,20 @@ a.custom-card, a.custom-card:hover {
 								th:text="${user.getRole()}"></h6>
 							<br>
 							<div class="btn-group" role="group" aria-label="Basic example">
-							  
-							  <button type="button" class="btn btn-secondary" th:if='${user.getRole().equals("Normal") or user.getRole().equals("Admin")}'>Make Premium</button>
-							  <button type="button" class="btn btn-secondary" th:if='${user.getRole().equals("Premium") or user.getRole().equals("Admin")}'>Make Normal</button>
-							  <button type="button" class="btn btn-secondary" th:if='${user.getRole().equals("Premium")or user.getRole().equals("Normal")}'>Make Admin</button>
+							
+							<form method="POST" th:action="@{/admin(id=${user.getId()},role='Premium')}">
+								<button type="submit" class="btn btn-secondary" name="submit" value="value">Make Premium</button>
+						    </form>
+						    
+						    <form method="POST" th:action="@{/admin(id=${user.getId()},role='Admin')}">
+								<button type="submit" class="btn btn-secondary" name="submit" value="value">Make Admin</button>
+						    </form>
+						    
+						    <form method="POST" th:action="@{/admin(id=${user.getId()},role='Normal')}">
+								<button type="submit" class="btn btn-secondary" name="submit" value="value">Make Normal</button>
+						    </form>
+						
+							
 							</div>
 						</div>
 				</div>
