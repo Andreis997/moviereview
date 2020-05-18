@@ -35,7 +35,7 @@ public class AdminController {
 		
 		UserDAO.getInstance().setUserRole(Integer.valueOf(id), role);
 		
-		return adminPage();
+		return new ModelAndView("redirect:admin");
 	}
 
 }
