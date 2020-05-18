@@ -29,7 +29,7 @@
 					</div>
 					
 					<button class="btn btn-lg btn-primary" name="Submit" value="Login" type="Submit" th:text="Login" style="margin-right:10px;font-size:25px"></button>
-					<a href="/register" style="font-size:25px">Forgot password?</a>
+					<a href="/register" style="font-size:25px">Register</a>
 					
 				</form>
 			</div>
