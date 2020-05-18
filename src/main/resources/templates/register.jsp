@@ -17,7 +17,7 @@
 		<div style="background-color: #343a40!important;; height: 80px;"></div>
 		<div class="container-fluid" style="margin-top: 30px;">
 	
-			<div class="row col-lg-4 col-lg-offset-4" style="margin-top: 400px; background-color: #fff; padding: 20px; border: solid 1px #ddd;">
+			<div class="row col-lg-4 col-lg-offset-4" style="margin-top: 40px; background-color: #fff; padding: 20px; border: solid 1px #ddd;">
 				<form autocomplete="off" action="#" th:action="@{/register}" method="post" class="form-signin" role="form">
 					<h3 class="form-signin-heading" style="font-size:35px">Registration Form</h3>
 					<div class="form-group">
